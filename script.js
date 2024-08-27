@@ -1,6 +1,40 @@
+// Función para validar el texto ingresado
+function validateInput(text) {
+    const regex = /^[a-z\s]*$/; // Solo permite letras minúsculas y espacios
+    return regex.test(text);
+}
+
+// Historial de encriptaciones/desencriptaciones
+let historyList = [];
+
+function updateHistory(text) {
+    if (historyList.length >= 5) {
+        historyList.shift(); // Elimina el primer elemento si ya hay 5 en el historial
+    }
+    historyList.push(text);
+    renderHistory();
+}
+
+function renderHistory() {
+    const historyElement = document.getElementById("history-list");
+    historyElement.innerHTML = "";
+    historyList.forEach(item => {
+        let li = document.createElement("li");
+        li.textContent = item;
+        historyElement.appendChild(li);
+    });
+}
+
 // Función para procesar el texto según la opción seleccionada (encriptar o desencriptar)
 function processText() {
     let inputText = document.getElementById("input-text").value;
+
+    // Validar el texto ingresado
+    if (!validateInput(inputText)) {
+        alert("Por favor, ingrese solo letras minúsculas sin acentos ni caracteres especiales.");
+        return;
+    }
+
     let outputText;
     let mode = document.querySelector('input[name="mode"]:checked').value;
 
@@ -21,6 +55,7 @@ function processText() {
     }
 
     document.getElementById("output-text").innerText = outputText;
+    updateHistory(outputText);
 }
 
 // Función para copiar el texto al portapapeles

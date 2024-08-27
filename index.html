@@ -13,6 +13,9 @@
         </div>
         <div class="main-content">
             <textarea id="input-text" class="text-input" placeholder="Ingrese el texto aquí"></textarea>
+            <div id="warning-message" class="warning-message">
+                Nota: Solo se permiten letras minúsculas sin acentos ni caracteres especiales.
+            </div>
             <div class="options">
                 <label>
                     <input type="radio" name="mode" value="encrypt" checked> Encriptar
@@ -28,6 +31,10 @@
         <div class="footer">
             <button id="action-button" onclick="processText()">Encriptar</button>
             <button id="copy-button" onclick="copyToClipboard()">Copiar</button>
+        </div>
+        <div id="history">
+            <h3>Historial de Encriptaciones/Desencriptaciones</h3>
+            <ul id="history-list"></ul>
         </div>
     </div>
     <script src="script.js"></script>
